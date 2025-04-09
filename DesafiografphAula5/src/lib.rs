@@ -1,6 +1,6 @@
 use petgraph::graph::{Graph, NodeIndex};
 use petgraph::visit::Dfs;
-
+use petgraph::dot::{Dot, Config};
 pub struct MyGraph {
     graph: Graph<&'static str, &'static str>,
     node1: NodeIndex,
@@ -34,6 +34,10 @@ impl MyGraph {
             visited_nodes.push(self.graph[node]);
         }
         visited_nodes
+    }
+
+    pub fn to_dot(&self) -> String {
+        format!("{:?}", Dot::with_config(&self.graph, &[Config::EdgeNoLabel]))
     }
 }
 
